@@ -1,9 +1,9 @@
-from fastapi import FastAPI, Request, Form
-from fastapi.responses import HTMLResponse
-from fastapi.responses import RedirectResponse
+from fastapi import FastAPI, Request, Form, Query
+from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 import json
+from typing import Optional
 from pathlib import Path
 from datetime import datetime
 
@@ -37,13 +37,24 @@ def save_data(data):
     with open(DATA_FILE, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
 
+@app.get("/add-form", response_class=HTMLResponse)
+def add_form(request: Request):
+    return templates.TemplateResponse("add.html", {"request": request})
+
 @app.get("/", response_class=HTMLResponse)
-def index(request: Request):
+def index(request: Request, category: Optional[str] = Query(None)):
     items = load_data()
-    return templates.TemplateResponse("index.html", {
-        "request": request,
-        "items": list(enumerate(items))  # ← enumerateで番号をつける
-    })
+    if category:
+        items = [item for item in items if item["category"] == category]
+
+    return templates.TemplateResponse(
+        "index.html",
+        {
+            "request": request,
+            "items": list(enumerate(items)),
+            "category": category,
+        }
+    )
 
 @app.post("/add")
 async def add_item(

@@ -2,12 +2,28 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>ブックリスト</title>
+    <title>視聴閲覧記録リスト</title>
     <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
     <h1>観た作品リスト</h1>
-    <a href="/add"> + 新しく追加</a>
+    <a href="/add-form"> + 新しく追加</a>
+    <br><br>
+
+    <!-- カテゴリ絞り込みフォーム -->
+    <form action="/" method="get">
+        <label for="category">カテゴリで絞り込む：</label>
+        <select name="category" id="category">
+            <option value="">全て</option>
+            <option value="書籍" {% if category == '書籍' %}selected{% endif %}>書籍</option>
+            <option value="映画" {% if category == '映画' %}selected{% endif %}>映画</option>
+            <option value="ドラマ" {% if category == 'ドラマ' %}selected{% endif %}>ドラマ</option>
+        </select>
+        <button type="submit">絞り込む</button><br>
+        <hr>
+    </form>
+
+    <!-- 登録内容の記載 -->
     <ul>
         {% for idx, item in items %}
             <li>
@@ -20,6 +36,8 @@
             </li>
         {% endfor %}
     </ul>
+
+    <!-- 削除確認ダイアログ -->
     <script>
         function confirmDelete() {
             return confirm("本当に削除してよろしいですか？");
