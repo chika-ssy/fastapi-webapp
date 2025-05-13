@@ -29,7 +29,16 @@
             <li>
                 <strong>{{ item.title }}</strong>（{{ item.category }}）<br>
                 <div class="comment">{{ item.comment }}</div><br>
-                <em>登録日時: {{ item.created_at }}</em><br><br>
+                <em>登録日時: {{ item.created_at }}</em><br>
+                {% if item.updated_at %}
+                    <em>修正日時: {{ item.updated_at }}</em><br>
+                {% endif %}
+
+                 <!-- 編集リンク -->
+                <form action="/edit/{{ idx }}" method="get">
+                    <button type="submit">編集</button>
+                </form>
+                <!-- 削除ボタン -->
                 <form action="/delete/{{ idx }}" method="post" onsubmit="return confirmDelete();">
                     <button type="submit">削除</button>
                 </form><br>

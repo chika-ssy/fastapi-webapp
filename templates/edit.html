@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>内容を編集</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <h1>内容を編集</h1>
+    <form action="/edit/{{ item_id }}" method="post">
+        <label>タイトル：
+            <input type="text" name="title" value="{{ item.title }}" required>
+        </label><br>
+        <label>カテゴリ:
+            <select name="category">
+                <option value="書籍" {% if item.category == '書籍' %}selected{% endif %}>書籍</option>
+                <option value="映画" {% if item.category == '映画' %}selected{% endif %}>映画</option>
+                <option value="ドラマ" {% if item.category == 'ドラマ' %}selected{% endif %}>ドラマ</option>
+            </select>
+        </label><br>
+        <label>コメント：
+            <textarea name="comment" rows="4" cols="40">{{ item.comment }}</textarea>
+        </label><br>
+        <button type="submit">更新</button>
+    </form>
+    <br>
+    <a href="/">戻る</a>
+</body>
+</html>

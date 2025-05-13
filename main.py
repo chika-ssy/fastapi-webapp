@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Request, Form, Query
+from fastapi import FastAPI, Request, Form, Query, HTTPException
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
@@ -55,6 +55,38 @@ def index(request: Request, category: Optional[str] = Query(None)):
             "category": category,
         }
     )
+
+from fastapi import HTTPException
+
+@app.get("/edit/{item_id}", response_class=HTMLResponse)
+def edit_item_form(request: Request, item_id: int):
+    items = load_data()
+    if not (0 <= item_id < len(items)):
+        raise HTTPException(status_code=404, detail="Item not found")
+
+    return templates.TemplateResponse("edit.html", {
+        "request": request,
+        "item_id": item_id,
+        "item": items[item_id]
+    })
+
+@app.post("/edit/{item_id}")
+def update_item(item_id: int,
+                title: str = Form(...),
+                category: str = Form(...),
+                comment: str = Form(...)):
+    items = load_data()
+    if not (0 <= item_id < len(items)):
+        raise HTTPException(status_code=404, detail="Item not found")
+
+    items[item_id]["title"] = title
+    items[item_id]["category"] = category
+    items[item_id]["comment"] = comment
+    items[item_id]["updated_at"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+    save_data(items)
+    return RedirectResponse("/", status_code=303)
+
 
 @app.post("/add")
 async def add_item(
