@@ -19,3 +19,9 @@ input, textarea {
     padding: 8px;
     margin-bottom: 10px;
 }
+
+.comment-buttons {
+    display: flex;
+    gap: 8px;
+    margin-top: 5px;
+}

@@ -34,14 +34,16 @@
                     <em>修正日時: {{ item.updated_at }}</em><br>
                 {% endif %}
 
-                 <!-- 編集リンク -->
-                <form action="/edit/{{ idx }}" method="get">
-                    <button type="submit">編集</button>
-                </form>
-                <!-- 削除ボタン -->
-                <form action="/delete/{{ idx }}" method="post" onsubmit="return confirmDelete();">
-                    <button type="submit">削除</button>
-                </form><br>
+                <div class="comment-buttons">
+                    <!-- 編集リンク -->
+                    <form action="/edit/{{ idx }}" method="get">
+                        <button type="submit">編集</button>
+                    </form>
+                    <!-- 削除ボタン -->
+                    <form action="/delete/{{ idx }}" method="post" onsubmit="return confirmDelete();">
+                        <button type="submit">削除</button>
+                    </form>
+                </div><br>
             </li>
         {% endfor %}
     </ul>
