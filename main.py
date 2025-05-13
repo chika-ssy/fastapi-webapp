@@ -1,5 +1,6 @@
 from fastapi import FastAPI, Request, Form
-from fastapi.responses import HTMLResponse, RedirectResponse
+from fastapi.responses import HTMLResponse
+from fastapi.responses import RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 import json
@@ -51,8 +52,8 @@ def add_post(title: str = Form(...), category: str = Form(...), comment: str = F
     save_data(items)
     return RedirectResponse(url="/", status_code=302)
 
-# 👇 削除機能を追加
-@app.get("/delete/{item_id}")
+# 👇 削除機能(POSTで管理)
+@app.post("/delete/{item_id}")
 def delete_item(item_id: int):
     items = load_data()
     if 0 <= item_id < len(items):

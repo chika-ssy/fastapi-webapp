@@ -13,7 +13,9 @@
             <li>
             <strong>{{ item.title }}</strong>（{{ item.category }}）<br>
             感想：{{ item.comment }}<br>
-            <a href="/delete/{{ idx }}" onclick="return confirmDelete()">🗑 削除</a>
+            <form action="/delete/{{ idx }}" method="post" onsubmit="return confirmDelete()" style="display:inline;">
+                <button type="submit">🗑 削除</button>
+            </form>
         </li>
     {% endfor %}
     </ul>
