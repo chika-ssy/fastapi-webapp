@@ -1,14 +1,32 @@
 <!DOCTYPE html>
+<html lang="ja"></html>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>FastAPI Web App</title>
+    <title>作品一覧</title>
     <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
-    <h1>Hello from FastAPI!</h1>
-    <button onclick="sayHello()">Click Me</button>
-    <script src="/static/js/script.js"></script>
+    <h1>📚 これまでに見た作品一覧</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>タイトル</th>
+                <th>カテゴリ</th>
+                <th>感想</th>
+                <th>評価</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+            <tr>
+                <td>{{ item.title }}</td>
+                <td>{{ item.category }}</td>
+                <td>{{ item.review }}</td>
+                <td>{{ item.rating }} / 5</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </body>
 </html>
-
