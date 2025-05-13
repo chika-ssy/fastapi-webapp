@@ -8,11 +8,22 @@
 <body>
     <h1>作品を追加</h1>
     <form action="/add" method="post">
-        <label>タイトル：<input type="text" name="title" required></label><br>
-        <label>カテゴリ（映画・本・ドラマなど）：<input type="text" name="category" required></label><br>
-        <label>コメント：<textarea name="comment" rows="4" cols="40"></textarea></label><br>
+        <label>タイトル：
+            <input type="text" name="title" required>
+        </label><br>
+        <label>カテゴリ: 
+            <select name="category">
+                <option value="書籍">書籍</option>
+                <option value="映画">映画</option>
+                <option value="ドラマ">ドラマ</option>
+            </select>
+        </label><br>
+        <label>コメント：
+            <textarea name="comment" rows="4" cols="40"></textarea>
+        </label><br>
         <button type="submit">追加</button>
     </form>
+    <br>
     <a href="/">戻る</a>
 </body>
 </html>

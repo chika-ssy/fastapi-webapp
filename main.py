@@ -5,6 +5,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 import json
 from pathlib import Path
+from datetime import datetime
 
 app = FastAPI()
 
@@ -24,7 +25,7 @@ sample_data = [
 ]
 '''
 
-DATA_FILE = Path("data.json")
+DATA_FILE = Path("data/items.json")
 
 def load_data():
     if DATA_FILE.exists():
@@ -39,18 +40,29 @@ def save_data(data):
 @app.get("/", response_class=HTMLResponse)
 def index(request: Request):
     items = load_data()
-    return templates.TemplateResponse("index.html", {"request": request, "items": enumerate(items)})
-
-@app.get("/add", response_class=HTMLResponse)
-def add_get(request: Request):
-    return templates.TemplateResponse("add.html", {"request": request})
+    return templates.TemplateResponse("index.html", {
+        "request": request,
+        "items": list(enumerate(items))  # ← enumerateで番号をつける
+    })
 
 @app.post("/add")
-def add_post(title: str = Form(...), category: str = Form(...), comment: str = Form(...)):
-    items = load_data()
-    items.append({"title": title, "category": category, "comment": comment})
-    save_data(items)
-    return RedirectResponse(url="/", status_code=302)
+async def add_item(
+    title: str = Form(...),
+    category: str = Form(...),
+    comment: str = Form(...)
+):
+    item = {
+        "title": title,
+        "category": category,
+        "comment": comment,
+        "created_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    }
+
+    items = load_data()  # ここを活用
+    items.append(item)
+    save_data(items)     # 同様に関数を活用
+
+    return RedirectResponse("/", status_code=303)
 
 # 👇 削除機能(POSTで管理)
 @app.post("/delete/{item_id}")

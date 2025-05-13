@@ -7,17 +7,18 @@
 </head>
 <body>
     <h1>観た作品リスト</h1>
-    <a href="/add">＋ 新しく追加</a>
+    <a href="/add"> + 新しく追加</a>
     <ul>
         {% for idx, item in items %}
             <li>
-            <strong>{{ item.title }}</strong>（{{ item.category }}）<br>
-            感想：{{ item.comment }}<br>
-            <form action="/delete/{{ idx }}" method="post" onsubmit="return confirmDelete()" style="display:inline;">
-                <button type="submit">🗑 削除</button>
-            </form>
-        </li>
-    {% endfor %}
+                <strong>{{ item.title }}</strong>（{{ item.category }}）<br>
+                <div class="comment">{{ item.comment }}</div><br>
+                <em>登録日時: {{ item.created_at }}</em><br><br>
+                <form action="/delete/{{ idx }}" method="post" onsubmit="return confirmDelete();">
+                    <button type="submit">削除</button>
+                </form><br>
+            </li>
+        {% endfor %}
     </ul>
     <script>
         function confirmDelete() {
