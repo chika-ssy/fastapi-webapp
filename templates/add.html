@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>新しく追加</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <h1>作品を追加</h1>
+    <form action="/add" method="post">
+        <label>タイトル：<input type="text" name="title" required></label><br>
+        <label>カテゴリ（映画・本・ドラマなど）：<input type="text" name="category" required></label><br>
+        <label>コメント：<textarea name="comment" rows="4" cols="40"></textarea></label><br>
+        <button type="submit">追加</button>
+    </form>
+    <a href="/">戻る</a>
+</body>
+</html>

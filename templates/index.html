@@ -1,32 +1,26 @@
 <!DOCTYPE html>
-<html lang="ja"></html>
-<html>
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>作品一覧</title>
+    <title>ブックリスト</title>
     <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
-    <h1>📚 これまでに見た作品一覧</h1>
-    <table border="1">
-        <thead>
-            <tr>
-                <th>タイトル</th>
-                <th>カテゴリ</th>
-                <th>感想</th>
-                <th>評価</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for item in items %}
-            <tr>
-                <td>{{ item.title }}</td>
-                <td>{{ item.category }}</td>
-                <td>{{ item.review }}</td>
-                <td>{{ item.rating }} / 5</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <h1>観た作品リスト</h1>
+    <a href="/add">＋ 新しく追加</a>
+    <ul>
+        {% for idx, item in items %}
+            <li>
+            <strong>{{ item.title }}</strong>（{{ item.category }}）<br>
+            感想：{{ item.comment }}<br>
+            <a href="/delete/{{ idx }}" onclick="return confirmDelete()">🗑 削除</a>
+        </li>
+    {% endfor %}
+    </ul>
+    <script>
+        function confirmDelete() {
+            return confirm("本当に削除してよろしいですか？");
+        }
+    </script>
 </body>
 </html>

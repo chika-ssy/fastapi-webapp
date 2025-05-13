@@ -1,9 +1,21 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    font-family: sans-serif;
     padding: 20px;
+    background-color: #f0f0f0;
 }
+
 h1 {
     color: #333;
 }
 
+form label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+input, textarea {
+    width: 100%;
+    max-width: 400px;
+    padding: 8px;
+    margin-bottom: 10px;
+}
