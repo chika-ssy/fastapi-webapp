@@ -41,7 +41,7 @@ input,
 textarea,
 select,
 button {
-    width: 50%;
+    width: 100%;
     max-width: 400px;
     padding: 8px;
     margin: 8px;
@@ -91,6 +91,22 @@ button {
     font-size: 14px;
 }
 
+.pagination {
+    margin-top: 20px;
+    font-size: 16px;
+}
+
+.pagination a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #007bff;
+}
+
+.pagination a:hover {
+    text-decoration: underline;
+}
+
+
 /* スマホ対応 */
 @media screen and (max-width: 600px) {
     .search-form label,
@@ -102,7 +118,7 @@ button {
         width: 100%;
         margin-right: 0;
     }
-    
+
     .search-form label {
         text-align: left;
         margin-bottom: 4px; /* ラベル下に余白を追加すると見やすい */

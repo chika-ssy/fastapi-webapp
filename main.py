@@ -3,6 +3,7 @@ from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 import json
+import math
 from typing import Optional
 from pathlib import Path
 from datetime import datetime
@@ -42,11 +43,12 @@ def add_form(request: Request):
     return templates.TemplateResponse("add.html", {"request": request})
 
 @app.get("/", response_class=HTMLResponse)
-def index(
+async def index(
     request: Request,
     category: Optional[str] = Query(None),
     keyword: Optional[str] = Query(None),
-    sort: str = Query("desc")
+    sort: str = Query("desc"),
+    page: int = 1
 ):
     items = load_data()
 
@@ -71,14 +73,23 @@ def index(
     else:
         items.sort(key=parse_dt, reverse=True)
 
+    # ページネーション処理
+    per_page = 10
+    total_pages = max(math.ceil(len(items) / per_page), 1)
+    start = (page - 1) * per_page
+    end = start + per_page
+    paginated_items = items[start:end]
+
     return templates.TemplateResponse(
         "index.html",
         {
             "request": request,
-            "items": list(enumerate(items)),
+            "items": list(enumerate(paginated_items)),
             "category": category,
             "keyword": keyword,
-            "sort": sort
+            "sort": sort,
+            "current_page": page,
+        "total_pages": total_pages
         }
     )
 

@@ -69,5 +69,19 @@
             return confirm("本当に削除してよろしいですか？");
         }
     </script>
+
+    <!-- ページネーション -->
+    <div class="pagination">
+    {% if current_page > 1 %}
+        <a href="/?page={{ current_page - 1 }}&category={{ category }}&keyword={{ keyword }}&sort={{ sort }}">← 前へ</a>
+    {% endif %}
+
+    <span>ページ {{ current_page }} / {{ total_pages }}</span>
+
+    {% if current_page < total_pages %}
+        <a href="/?page={{ current_page + 1 }}&category={{ category }}&keyword={{ keyword }}&sort={{ sort }}">次へ →</a>
+    {% endif %}
+</div>
+
 </body>
 </html>
