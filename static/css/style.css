@@ -8,16 +8,37 @@ h1 {
     color: #333;
 }
 
+/* フォーム全体の共通スタイル */
+form {
+    margin-bottom: 15px;
+}
+
+/* カテゴリ・検索フォームの入力系の整列 */
 form label {
-    display: block;
-    margin-bottom: 10px;
+    margin-right: 8px;
+}
+
+/* 「+ 新しく追加」リンクをボタン風に */
+a.add-button {
+    display: inline-block;
+    background-color: #f77422;
+    color: white;
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    transition: background-color 0.3s ease;
+}
+a.add-button:hover {
+    background-color: orange;
 }
 
 input, textarea {
     width: 100%;
     max-width: 400px;
     padding: 8px;
-    margin-bottom: 10px;
+    margin: 8px;
 }
 
 .comment-buttons {
@@ -26,8 +47,37 @@ input, textarea {
     margin-top: 5px;
 }
 
+
+/* .search-form を横並びにする */
 .search-form {
-    display: flex;
-    gap: 8px;
     align-items: center;
+    gap: 18px; /* 要素間のマージン */
+    flex-wrap: wrap; /* スマホで折り返す用 */
+}
+
+/* 検索ボタンとクリアボタンの間隔 */
+.search-form button + a {
+    margin-left: 13px;
+}
+
+@media screen and (max-width: 600px) {
+    .search-form {
+        flex-direction: column; /* 縦並びに */
+        align-items: flex-start;
+    }
+
+    .search-form label,
+    .search-form input,
+    .search-form select,
+    .search-form button,
+    .search-form a {
+        margin-right: 0;
+        margin-bottom: 10px;
+        width: 100%; /* 幅いっぱいに広げる */
+    }
+
+    .search-form button,
+    .search-form a {
+        width: auto; /* ボタンは必要な幅でOK */
+    }
 }

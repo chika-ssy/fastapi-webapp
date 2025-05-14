@@ -7,11 +7,12 @@
 </head>
 <body>
     <h1>観た作品リスト</h1>
-    <a href="/add-form"> + 新しく追加</a>
+    <a href="/add-form" class="add-button"> + 新しく追加</a>
+
     <br><br>
 
-    <!-- カテゴリ絞り込みフォーム -->
-    <form action="/" method="get">
+    <!-- 絞り込み + キーワード + 並び替え フォーム -->
+    <form action="/" method="get" class="search-form">
         <label for="category">カテゴリで絞り込む：</label>
         <select name="category" id="category">
             <option value="">全て</option>
@@ -19,21 +20,28 @@
             <option value="映画" {% if category == '映画' %}selected{% endif %}>映画</option>
             <option value="ドラマ" {% if category == 'ドラマ' %}selected{% endif %}>ドラマ</option>
         </select>
-        <button type="submit">絞り込む</button><br>
-    </form>
+        <br>
 
-    <!-- 検索フォーム -->
-    <form action="/" method="get" class="search-form">
         <label for="keyword">キーワード検索：</label>
         <input type="text" id="keyword" name="keyword" value="{{ keyword or '' }}">
-        <button type="submit">検索</button>
-    <!-- 検索クリアボタン -->
+        <br>
+
+        <label for="sort">並び順：</label>
+        <select name="sort" id="sort">
+            <option value="desc" {% if sort == 'desc' %}selected{% endif %}>新しい順</option>
+            <option value="asc" {% if sort == 'asc' %}selected{% endif %}>古い順</option>
+        </select>
+        <br><br>
+
+        <button type="submit">検索／絞り込み</button>
+
+        <!-- 検索クリアボタン -->
         <a href="/" style="text-decoration: none;">
             <button type="button">クリア</button>
         </a>
     </form>
-    <hr>
 
+    <br><hr>
     <!-- 登録内容の記載 -->
     <ul>
         {% for idx, item in items %}

@@ -42,7 +42,12 @@ def add_form(request: Request):
     return templates.TemplateResponse("add.html", {"request": request})
 
 @app.get("/", response_class=HTMLResponse)
-def index(request: Request, category: Optional[str] = Query(None), keyword: Optional[str] = Query(None)):
+def index(
+    request: Request,
+    category: Optional[str] = Query(None),
+    keyword: Optional[str] = Query(None),
+    sort: str = Query("desc")
+):
     items = load_data()
 
     # カテゴリでフィルター
@@ -52,7 +57,19 @@ def index(request: Request, category: Optional[str] = Query(None), keyword: Opti
     # キーワードでフィルター（タイトルとコメントに対して）
     if keyword:
         keyword_lower = keyword.lower()
-        items = [item for item in items if keyword_lower in item["title"].lower() or keyword_lower in item["comment"].lower()]
+        items = [
+            item for item in items
+            if keyword_lower in item["title"].lower() or keyword_lower in item["comment"].lower()
+        ]
+
+    # created_at を datetime に変換してソート
+    def parse_dt(item):
+        return datetime.strptime(item["created_at"], "%Y-%m-%d %H:%M:%S")
+
+    if sort == "asc":
+        items.sort(key=parse_dt)
+    else:
+        items.sort(key=parse_dt, reverse=True)
 
     return templates.TemplateResponse(
         "index.html",
@@ -61,9 +78,9 @@ def index(request: Request, category: Optional[str] = Query(None), keyword: Opti
             "items": list(enumerate(items)),
             "category": category,
             "keyword": keyword,
+            "sort": sort
         }
     )
-
 
 @app.get("/edit/{item_id}", response_class=HTMLResponse)
 def edit_item_form(request: Request, item_id: int):
