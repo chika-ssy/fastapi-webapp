@@ -25,3 +25,9 @@ input, textarea {
     gap: 8px;
     margin-top: 5px;
 }
+
+.search-form {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}

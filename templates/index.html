@@ -20,8 +20,19 @@
             <option value="ドラマ" {% if category == 'ドラマ' %}selected{% endif %}>ドラマ</option>
         </select>
         <button type="submit">絞り込む</button><br>
-        <hr>
     </form>
+
+    <!-- 検索フォーム -->
+    <form action="/" method="get" class="search-form">
+        <label for="keyword">キーワード検索：</label>
+        <input type="text" id="keyword" name="keyword" value="{{ keyword or '' }}">
+        <button type="submit">検索</button>
+    <!-- 検索クリアボタン -->
+        <a href="/" style="text-decoration: none;">
+            <button type="button">クリア</button>
+        </a>
+    </form>
+    <hr>
 
     <!-- 登録内容の記載 -->
     <ul>

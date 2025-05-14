@@ -42,10 +42,17 @@ def add_form(request: Request):
     return templates.TemplateResponse("add.html", {"request": request})
 
 @app.get("/", response_class=HTMLResponse)
-def index(request: Request, category: Optional[str] = Query(None)):
+def index(request: Request, category: Optional[str] = Query(None), keyword: Optional[str] = Query(None)):
     items = load_data()
+
+    # カテゴリでフィルター
     if category:
         items = [item for item in items if item["category"] == category]
+
+    # キーワードでフィルター（タイトルとコメントに対して）
+    if keyword:
+        keyword_lower = keyword.lower()
+        items = [item for item in items if keyword_lower in item["title"].lower() or keyword_lower in item["comment"].lower()]
 
     return templates.TemplateResponse(
         "index.html",
@@ -53,10 +60,10 @@ def index(request: Request, category: Optional[str] = Query(None)):
             "request": request,
             "items": list(enumerate(items)),
             "category": category,
+            "keyword": keyword,
         }
     )
 
-from fastapi import HTTPException
 
 @app.get("/edit/{item_id}", response_class=HTMLResponse)
 def edit_item_form(request: Request, item_id: int):
