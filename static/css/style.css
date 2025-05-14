@@ -15,6 +15,9 @@ form {
 
 /* カテゴリ・検索フォームの入力系の整列 */
 form label {
+    display: inline-block;
+    width: 150px; /* ラベル幅固定で「：」の位置を揃える */
+    text-align: right;
     margin-right: 8px;
 }
 
@@ -34,50 +37,80 @@ a.add-button:hover {
     background-color: orange;
 }
 
-input, textarea {
-    width: 100%;
+input,
+textarea,
+select,
+button {
+    width: 50%;
     max-width: 400px;
     padding: 8px;
     margin: 8px;
-}
-
-.comment-buttons {
-    display: flex;
-    gap: 8px;
-    margin-top: 5px;
+    box-sizing: border-box;
 }
 
 
-/* .search-form を横並びにする */
+.comment-buttons button {
+    width: auto;              /* 中の文字に応じた幅 */
+    padding: 6px 16px;        /* 横長にする */
+    font-size: 14px;
+    border: none;
+    background-color: #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.comment-buttons button:hover {
+    background-color: #bbb;
+}
+
+
+
 .search-form {
-    align-items: center;
-    gap: 18px; /* 要素間のマージン */
-    flex-wrap: wrap; /* スマホで折り返す用 */
+    margin-bottom: 20px;
 }
 
-/* 検索ボタンとクリアボタンの間隔 */
-.search-form button + a {
-    margin-left: 13px;
+.search-form label {
+    margin-right: 10px;
 }
 
+.search-form select,
+.search-form input {
+    margin-bottom: 10px;
+    max-width: 300px;
+    width: 100%;
+    padding: 6px;
+    box-sizing: border-box;
+}
+
+.search-form button,
+.search-form a {
+    display: inline-block;
+    margin-top: 10px;
+    margin-right: 20px; /* 検索ボタンとクリアボタンの間 */
+    padding: 6px 12px;
+    font-size: 14px;
+}
+
+/* スマホ対応 */
 @media screen and (max-width: 600px) {
-    .search-form {
-        flex-direction: column; /* 縦並びに */
-        align-items: flex-start;
-    }
-
     .search-form label,
-    .search-form input,
     .search-form select,
+    .search-form input,
     .search-form button,
     .search-form a {
+        display: block;
+        width: 100%;
         margin-right: 0;
-        margin-bottom: 10px;
-        width: 100%; /* 幅いっぱいに広げる */
+    }
+    
+    .search-form label {
+        text-align: left;
+        margin-bottom: 4px; /* ラベル下に余白を追加すると見やすい */
     }
 
     .search-form button,
     .search-form a {
-        width: auto; /* ボタンは必要な幅でOK */
+        margin-bottom: 10px;
+        width: auto;
     }
 }

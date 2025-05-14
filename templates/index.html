@@ -2,44 +2,40 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>視聴閲覧記録リスト</title>
+    <title>読了・鑑了 記録リスト</title>
     <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
-    <h1>観た作品リスト</h1>
+    <h1>読了・鑑了リスト</h1>
     <a href="/add-form" class="add-button"> + 新しく追加</a>
+    <br>
 
-    <br><br>
+        <form method="GET" action="/" class="search-form">
+    <label for="category">カテゴリ：</label>
+    <select name="category" id="category">
+        <option value="">全て</option>
+        <option value="書籍" {% if category == '書籍' %}selected{% endif %}>書籍</option>
+        <option value="映画" {% if category == '映画' %}selected{% endif %}>映画</option>
+        <option value="ドラマ" {% if category == 'ドラマ' %}selected{% endif %}>ドラマ</option>
+    </select>
+    <br>
 
-    <!-- 絞り込み + キーワード + 並び替え フォーム -->
-    <form action="/" method="get" class="search-form">
-        <label for="category">カテゴリで絞り込む：</label>
-        <select name="category" id="category">
-            <option value="">全て</option>
-            <option value="書籍" {% if category == '書籍' %}selected{% endif %}>書籍</option>
-            <option value="映画" {% if category == '映画' %}selected{% endif %}>映画</option>
-            <option value="ドラマ" {% if category == 'ドラマ' %}selected{% endif %}>ドラマ</option>
-        </select>
-        <br>
+    <label for="keyword">キーワード検索：</label>
+    <input type="text" id="keyword" name="keyword" value="{{ keyword or '' }}">
+    <br>
 
-        <label for="keyword">キーワード検索：</label>
-        <input type="text" id="keyword" name="keyword" value="{{ keyword or '' }}">
-        <br>
+    <label for="sort">並び順：</label>
+    <select name="sort" id="sort">
+        <option value="desc" {% if sort == 'desc' %}selected{% endif %}>新しい順</option>
+        <option value="asc" {% if sort == 'asc' %}selected{% endif %}>古い順</option>
+    </select>
+    <br>
 
-        <label for="sort">並び順：</label>
-        <select name="sort" id="sort">
-            <option value="desc" {% if sort == 'desc' %}selected{% endif %}>新しい順</option>
-            <option value="asc" {% if sort == 'asc' %}selected{% endif %}>古い順</option>
-        </select>
-        <br><br>
+    <!-- 検索・クリアボタン -->
+    <button type="submit">検索／並び替え</button>
+    <a href="/" class="clear-button">クリア</a>
+</form>
 
-        <button type="submit">検索／絞り込み</button>
-
-        <!-- 検索クリアボタン -->
-        <a href="/" style="text-decoration: none;">
-            <button type="button">クリア</button>
-        </a>
-    </form>
 
     <br><hr>
     <!-- 登録内容の記載 -->
