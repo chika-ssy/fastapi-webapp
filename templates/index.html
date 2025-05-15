@@ -52,7 +52,7 @@
 
                 <div class="button-group">
                     <!-- 編集ボタン -->
-                    <form method="get" action="{{ url_for('edit', item_id=idx) }}" class="form-group">
+                    <form method="get" action="{{ url_for('edit', item_id=item.id) }}" class="form-group">
                         <button type="submit" class="edit-button">編集</button>
                     </form>
                     <!-- 削除ボタン -->
