@@ -1,5 +1,4 @@
 from fastapi import FastAPI, Request, Form, Query,HTTPException
-from fastapi import FastAPI, Request, Form, Query
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
