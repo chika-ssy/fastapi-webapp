@@ -21,6 +21,9 @@
                 {% if item.updated_at %}
                     <em>修正日時: {{ item.updated_at|format_datetime }}</em><br>
                 {% endif %}
+                <form method="post" action="{{ url_for('restore_item', item_id=item.id) }}" onsubmit="return confirmDelete();" class="form-group">
+                        <button type="submit" class="restore-button">復元</button>
+                    </form>
             </li><hr>
         {% endfor %}
         </ul>
