@@ -1,8 +1,5 @@
-<<<<<<< HEAD
 from fastapi import FastAPI, Request, Form, Query,HTTPException
-=======
 from fastapi import FastAPI, Request, Form, Query
->>>>>>> 78e74142a37d9f4e2cad56f7581a41d40cb25f31
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
@@ -124,11 +121,7 @@ async def index(
         "total_pages": total_pages
     })
 
-<<<<<<< HEAD
 @app.get("/edit/{item_id}", response_class=HTMLResponse, name="edit")
-=======
-@app.get("/edit/{item_id}", response_class=HTMLResponse)
->>>>>>> 78e74142a37d9f4e2cad56f7581a41d40cb25f31
 async def edit_form(request: Request, item_id: str):
     items = load_data()
     for item in items:
@@ -140,11 +133,8 @@ async def edit_form(request: Request, item_id: str):
             })
     raise HTTPException(status_code=404, detail="Item not found")
 
-<<<<<<< HEAD
+
 @app.post("/edit/{item_id}", name="update_item")
-=======
-@app.post("/edit/{item_id}")
->>>>>>> 78e74142a37d9f4e2cad56f7581a41d40cb25f31
 async def update_item(item_id: str, title: str = Form(...), category: str = Form(...), comment: str = Form(...)):
     items = load_data()
     for item in items:
@@ -157,11 +147,8 @@ async def update_item(item_id: str, title: str = Form(...), category: str = Form
             return RedirectResponse(url="/", status_code=303)
     raise HTTPException(status_code=404, detail="Item not found")
 
-<<<<<<< HEAD
+
 @app.post("/delete/{item_id}", name="delete_item")
-=======
-@app.post("/delete/{item_id}")
->>>>>>> 78e74142a37d9f4e2cad56f7581a41d40cb25f31
 async def delete_item(item_id: str):
     items = load_data()
     new_items = []
@@ -182,11 +169,8 @@ async def delete_item(item_id: str):
 
     raise HTTPException(status_code=404, detail="Item not found")
 
-<<<<<<< HEAD
+
 @app.post("/restore/{item_id}", name="restore_item")
-=======
-@app.post("/restore/{item_id}")
->>>>>>> 78e74142a37d9f4e2cad56f7581a41d40cb25f31
 async def restore_item(item_id: str):
     trash = read_trash()
     items = load_data()
