@@ -1,0 +1,31 @@
+<!-- templates/trashbox.html -->
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>ごみ箱</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <h1>ごみ箱</h1>
+    <a href="/" class="back-button">← 戻る</a>
+    <hr>
+
+    {% if trash_items %}
+        <ul>
+        {% for item in trash_items %}
+            <li>
+                <strong>{{ item.title }}</strong>（{{ item.category }}）<br>
+                <div class="comment">{{ item.comment }}</div><br>
+                <em>登録日時: {{ item.created_at|format_datetime }}</em><br>
+                {% if item.updated_at %}
+                    <em>修正日時: {{ item.updated_at|format_datetime }}</em><br>
+                {% endif %}
+            </li><hr>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>ごみ箱は空です。</p>
+    {% endif %}
+</body>
+</html>

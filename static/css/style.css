@@ -13,14 +13,6 @@ form {
     margin-bottom: 15px;
 }
 
-/* カテゴリ・検索フォームの入力系の整列 */
-form label {
-    display: inline-block;
-    width: 150px; /* ラベル幅固定で「：」の位置を揃える */
-    text-align: right;
-    margin-right: 8px;
-}
-
 /* 「+ 新しく追加」リンクをボタン風に */
 a.add-button {
     display: inline-block;
@@ -37,33 +29,23 @@ a.add-button:hover {
     background-color: orange;
 }
 
-input,
-textarea,
-select,
-button {
-    width: 100%;
+/* カテゴリ・検索フォームの入力系の整列 */
+form label {
+    display: flex;
+    display: inline-block;
+    width: 150px; /* ラベル幅固定で「：」の位置を揃える */
+    text-align: right;
+    margin-right: 8px;
+}
+
+/* プルダウン内容の調整 */
+select {
+    width: 50%;
     max-width: 400px;
     padding: 8px;
     margin: 8px;
     box-sizing: border-box;
 }
-
-
-.comment-buttons button {
-    width: auto;              /* 中の文字に応じた幅 */
-    padding: 6px 16px;        /* 横長にする */
-    font-size: 14px;
-    border: none;
-    background-color: #ccc;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.comment-buttons button:hover {
-    background-color: #bbb;
-}
-
-
 
 .search-form {
     margin-bottom: 20px;
@@ -89,8 +71,27 @@ button {
     margin-right: 20px; /* 検索ボタンとクリアボタンの間 */
     padding: 6px 12px;
     font-size: 14px;
+    min-width: 140px;
 }
 
+
+/* テキスト入力欄設定 */
+input,
+textarea {
+    width: 200%;
+    max-width: 400px;
+    box-sizing: border-box;
+}
+
+/* 各種ボタンのデザイン */
+.button-group {
+    display: flex;
+    gap: 10px;
+    padding: 8px;
+}
+
+
+/* ページネーション */
 .pagination {
     margin-top: 20px;
     font-size: 16px;

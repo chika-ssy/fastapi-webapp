@@ -8,33 +8,34 @@
 <body>
     <h1>読了・鑑了リスト</h1>
     <a href="/add-form" class="add-button"> + 新しく追加</a>
+    <a href="/TrashBox-form" class="TrashBox-button"> ごみ箱</a>
     <br>
 
-        <form method="GET" action="/" class="search-form">
-    <label for="category">カテゴリ：</label>
-    <select name="category" id="category">
-        <option value="">全て</option>
-        <option value="書籍" {% if category == '書籍' %}selected{% endif %}>書籍</option>
-        <option value="映画" {% if category == '映画' %}selected{% endif %}>映画</option>
-        <option value="ドラマ" {% if category == 'ドラマ' %}selected{% endif %}>ドラマ</option>
-    </select>
-    <br>
+    <form method="GET" action="/" class="search-form">
+        <label for="category">カテゴリ：</label>
+        <select name="category" id="category">
+            <option value="">全て</option>
+            <option value="書籍" {% if category == '書籍' %}selected{% endif %}>書籍</option>
+            <option value="映画" {% if category == '映画' %}selected{% endif %}>映画</option>
+            <option value="ドラマ" {% if category == 'ドラマ' %}selected{% endif %}>ドラマ</option>
+        </select>
+        <br>
 
-    <label for="keyword">キーワード検索：</label>
-    <input type="text" id="keyword" name="keyword" value="{{ keyword or '' }}">
-    <br>
+        <label for="keyword">キーワード検索：</label>
+        <input type="text" id="keyword" name="keyword" value="{{ keyword or '' }}">
+        <br>
 
-    <label for="sort">並び順：</label>
-    <select name="sort" id="sort">
-        <option value="desc" {% if sort == 'desc' %}selected{% endif %}>新しい順</option>
-        <option value="asc" {% if sort == 'asc' %}selected{% endif %}>古い順</option>
-    </select>
-    <br>
+        <label for="sort">並び順：</label>
+        <select name="sort" id="sort">
+            <option value="desc" {% if sort == 'desc' %}selected{% endif %}>新しい順</option>
+            <option value="asc" {% if sort == 'asc' %}selected{% endif %}>古い順</option>
+        </select>
+        <br>
 
-    <!-- 検索・クリアボタン -->
-    <button type="submit">検索／並び替え</button>
-    <a href="/" class="clear-button">クリア</a>
-</form>
+        <!-- 検索・クリアボタン -->
+        <button type="submit">検索／並び替え</button>
+        <a href="/" class="clear-button">クリア</a>
+    </form>
 
 
     <br><hr>
@@ -44,21 +45,23 @@
             <li>
                 <strong>{{ item.title }}</strong>（{{ item.category }}）<br>
                 <div class="comment">{{ item.comment }}</div><br>
-                <em>登録日時: {{ item.created_at }}</em><br>
+                <em>登録日時: {{ item.created_at|format_datetime }}</em><br>
                 {% if item.updated_at %}
-                    <em>修正日時: {{ item.updated_at }}</em><br>
+                    <em>修正日時: {{ item.updated_at|format_datetime }}</em><br>
                 {% endif %}
 
-                <div class="comment-buttons">
-                    <!-- 編集リンク -->
-                    <form action="/edit/{{ idx }}" method="get">
-                        <button type="submit">編集</button>
+                <div class="button-group">
+                    <!-- 編集ボタン -->
+                    <form method="get" action="{{ url_for('edit', item_id=idx) }}">
+                        <button type="submit" class="edit-button">編集</button>
                     </form>
                     <!-- 削除ボタン -->
-                    <form action="/delete/{{ idx }}" method="post" onsubmit="return confirmDelete();">
-                        <button type="submit">削除</button>
+                    <form method="post" action="{{ url_for('delete_item', item_id=item.id) }}" onsubmit="return confirmDelete();">
+                        <button type="submit" class="delete-button">削除</button>
                     </form>
-                </div><br>
+
+
+                </div><hr><br>
             </li>
         {% endfor %}
     </ul>
