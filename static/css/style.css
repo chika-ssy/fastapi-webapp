@@ -2,23 +2,60 @@ body {
     font-family: sans-serif;
     padding: 20px;
     background-color: #f0f0f0;
-}
-
-h1 {
     color: #333;
 }
 
-/* フォーム全体の共通スタイル */
-form {
-    margin-bottom: 15px;
+h1 {
+    margin-bottom: 20px;
 }
 
-/* 「+ 新しく追加」リンクをボタン風に */
+/* 共通フォーム設定 */
+form {
+    margin-bottom: 20px;
+}
+
+.search-form,
+.form-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+    flex-wrap: wrap; /* スマホ時に折り返す */
+}
+
+.form-group label,
+.search-form label {
+    width: 150px;
+    min-width: 120px;
+    text-align: right;
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select,
+.search-form input,
+.search-form textarea,
+.search-form select {
+    flex: 1;
+    max-width: 400px;
+    padding: 8px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+
+textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* 追加ボタン風リンク */
 a.add-button {
     display: inline-block;
     background-color: #f77422;
     color: white;
-    padding: 8px 16px;
+    padding: 10px 16px;
     text-decoration: none;
     border-radius: 6px;
     font-weight: bold;
@@ -29,105 +66,82 @@ a.add-button:hover {
     background-color: orange;
 }
 
-/* カテゴリ・検索フォームの入力系の整列 */
-form label {
-    display: flex;
-    display: inline-block;
-    width: 150px; /* ラベル幅固定で「：」の位置を揃える */
-    text-align: right;
-    margin-right: 8px;
-}
-
-/* プルダウン内容の調整 */
-select {
-    width: 50%;
-    max-width: 400px;
-    padding: 8px;
-    margin: 8px;
-    box-sizing: border-box;
-}
-
-.search-form {
-    margin-bottom: 20px;
-}
-
-.search-form label {
-    margin-right: 10px;
-}
-
-.search-form select,
-.search-form input {
-    margin-bottom: 10px;
-    max-width: 300px;
-    width: 100%;
-    padding: 6px;
-    box-sizing: border-box;
-}
-
+/* ボタン類 */
 .search-form button,
-.search-form a {
+.search-form a,
+.button-group button,
+.button-group a {
     display: inline-block;
-    margin-top: 10px;
-    margin-right: 20px; /* 検索ボタンとクリアボタンの間 */
-    padding: 6px 12px;
+    margin: 10px 10px 0 0;
+    padding: 8px 16px;
     font-size: 14px;
     min-width: 140px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+}
+.search-form a,
+.button-group a {
+    background-color: #6c757d;
+}
+.search-form button:hover,
+.button-group button:hover,
+.search-form a:hover,
+.button-group a:hover {
+    background-color: #0056b3;
 }
 
-
-/* テキスト入力欄設定 */
-input,
-textarea {
-    width: 200%;
-    max-width: 400px;
-    box-sizing: border-box;
-}
-
-/* 各種ボタンのデザイン */
-.button-group {
+/* フォームグループのレイアウト */
+.form-group {
     display: flex;
-    gap: 10px;
-    padding: 8px;
+    align-items: flex-start;
+    margin-bottom: 12px;
 }
-
 
 /* ページネーション */
 .pagination {
-    margin-top: 20px;
+    margin-top: 30px;
     font-size: 16px;
 }
-
 .pagination a {
     margin: 0 10px;
     text-decoration: none;
     color: #007bff;
 }
-
 .pagination a:hover {
     text-decoration: underline;
 }
 
-
 /* スマホ対応 */
 @media screen and (max-width: 600px) {
-    .search-form label,
-    .search-form select,
-    .search-form input,
-    .search-form button,
-    .search-form a {
-        display: block;
-        width: 100%;
-        margin-right: 0;
+    .form-group,
+    .search-form {
+        flex-direction: column;
+        align-items: stretch;
     }
 
+    .form-group label,
     .search-form label {
+        width: 100%;
         text-align: left;
-        margin-bottom: 4px; /* ラベル下に余白を追加すると見やすい */
+        margin-bottom: 6px;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select,
+    .search-form button,
+    .search-form a {
+        width: 100%;
+        max-width: 100%;
     }
 
     .search-form button,
     .search-form a {
-        margin-bottom: 10px;
-        width: auto;
+        min-width: unset;
     }
 }
