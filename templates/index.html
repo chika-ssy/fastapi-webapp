@@ -52,10 +52,7 @@
 
                 <div class="button-group">
                     <!-- 編集ボタン -->
-                    <form method="get" action="{{ url_for('edit', item_id=item.id) }}" class="form-group">
-">
->>>>>>> 78e74142a37d9f4e2cad56f7581a41d40cb25f31
-button">編集</button>
+                    <form method="get" action="{{ url_for('edit', item_id=item.id) }}" class="form-group">編集</button>
                     </form>
                     <!-- 削除ボタン -->
                     <form method="post" action="{{ url_for('delete_item', item_id=item.id) }}" onsubmit="return confirmDelete();" class="form-group">
