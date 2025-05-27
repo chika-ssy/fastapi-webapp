@@ -1,1 +1,54 @@
-venv/ 
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# Virtual Environment
+venv/
+ENV/
+env/
+.venv/
+.ENV/
+
+# IDE / Editor
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Jupyter Notebook Checkpoints
+.ipynb_checkpoints/
+
+# OS generated
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# dotenv / secrets
+.env
+.env.*
+
+# Logs
+*.log
+
+# MyPy / Pylint / Coverage
+.mypy_cache/
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.cache/
+
+# Compiled HTML/JS if using templates
+*.html~
+*.js~
+
+# SQLite / Other databases (if not tracked)
+*.db
+*.sqlite3
+
+# Uvicorn reload artifacts
+reload.*
